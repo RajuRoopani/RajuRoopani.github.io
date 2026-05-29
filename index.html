@@ -4,11 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Raju Roopani — Principal Engineer · Conversational AI</title>
-<meta name="description" content="Raju Roopani — Principal Engineer focused on real-time conversational AI and agentic systems. 14+ years building distributed platforms at planetary scale." />
+<meta name="description" content="Raju Roopani — Principal Engineer focused on real-time conversational AI and agentic systems. 14+ years building distributed platforms at planetary scale. Built the Meetings AI layer and Agent Extensibility Platform inside Microsoft Teams (300M+ DAU)." />
 <meta name="author" content="Raju Roopani" />
-<!-- Open Graph -->
 <meta property="og:title" content="Raju Roopani — Principal Engineer · Conversational AI" />
-<meta property="og:description" content="Real-time RAG, agentic orchestration, and production AI at scale. Built the Meetings AI layer and Agent Extensibility Platform inside Microsoft Teams (300M+ DAU)." />
+<meta property="og:description" content="Real-time RAG, agentic orchestration, and production AI at scale. The Meetings AI layer and Agent Extensibility Platform inside Microsoft Teams (300M+ DAU)." />
 <meta property="og:type" content="profile" />
 <meta property="og:url" content="https://rajuroopani.github.io/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,8 +16,8 @@
 <style>
   :root {
     --bg: #07070b;
-    --bg-2: #0c0c14;
     --panel: rgba(255, 255, 255, 0.035);
+    --panel-2: rgba(255, 255, 255, 0.05);
     --panel-border: rgba(255, 255, 255, 0.08);
     --text: #e8e8f0;
     --text-dim: #9a9ab0;
@@ -38,63 +37,56 @@
     font-family: var(--sans);
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.65;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Ambient gradient field */
   body::before {
     content: "";
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background:
       radial-gradient(60% 50% at 15% 0%, rgba(139,92,246,0.16), transparent 60%),
-      radial-gradient(50% 45% at 90% 10%, rgba(6,182,212,0.12), transparent 60%),
-      radial-gradient(70% 60% at 50% 110%, rgba(99,102,241,0.10), transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+      radial-gradient(50% 45% at 90% 8%, rgba(6,182,212,0.12), transparent 60%),
+      radial-gradient(70% 60% at 50% 112%, rgba(99,102,241,0.10), transparent 60%);
+    pointer-events: none; z-index: 0;
   }
 
   .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-
+  .narrow { max-width: 840px; }
   a { color: inherit; text-decoration: none; }
 
   /* ---------- NAV ---------- */
   nav {
     position: sticky; top: 0; z-index: 50;
     backdrop-filter: blur(14px);
-    background: rgba(7,7,11,0.6);
+    background: rgba(7,7,11,0.62);
     border-bottom: 1px solid var(--panel-border);
   }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.02em; }
   .brand .dot {
     width: 11px; height: 11px; border-radius: 50%;
-    background: var(--grad);
-    box-shadow: 0 0 16px rgba(139,92,246,0.8);
+    background: var(--grad); box-shadow: 0 0 16px rgba(139,92,246,0.8);
     animation: pulse 2.6s ease-in-out infinite;
   }
   @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(0.82); } }
-  .nav-links { display: flex; gap: 26px; font-size: 0.86rem; color: var(--text-dim); }
+  .nav-links { display: flex; gap: 24px; font-size: 0.86rem; color: var(--text-dim); }
   .nav-links a { transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
-  @media (max-width: 720px) { .nav-links { display: none; } }
+  @media (max-width: 820px) { .nav-links { display: none; } }
 
   /* ---------- HERO ---------- */
-  header { padding: 92px 0 64px; }
+  header { padding: 92px 0 60px; }
   .eyebrow {
     font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--cyan); margin-bottom: 22px;
     display: inline-flex; align-items: center; gap: 10px;
   }
   .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--cyan); opacity: 0.7; }
-  h1 {
-    font-size: clamp(2.6rem, 7vw, 4.6rem);
-    font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 18px;
-  }
+  h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 18px; }
   h1 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .tagline { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--text-dim); max-width: 720px; font-weight: 300; }
+  .tagline { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--text-dim); max-width: 740px; font-weight: 300; }
   .tagline strong { color: var(--text); font-weight: 500; }
 
   .meta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
@@ -108,51 +100,20 @@
   .chip-link svg { width: 15px; height: 15px; opacity: 0.85; }
 
   /* ---------- SECTION ---------- */
-  section { padding: 56px 0; }
+  section { padding: 52px 0; }
   .sec-label {
     font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--text-faint); margin-bottom: 26px; display: flex; align-items: center; gap: 12px;
+    color: var(--text-faint); margin-bottom: 22px; display: flex; align-items: center; gap: 12px;
   }
   .sec-label::after { content: ""; flex: 1; height: 1px; background: var(--panel-border); }
-  h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; }
-
-  /* ---------- DOCUMENT CARDS ---------- */
-  .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  @media (max-width: 820px) { .docs { grid-template-columns: 1fr; } }
-  .doc-card {
-    position: relative; border-radius: var(--radius); overflow: hidden;
-    border: 1px solid var(--panel-border); background: var(--panel);
-    display: flex; flex-direction: column; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-  }
-  .doc-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.45); box-shadow: 0 24px 60px -28px rgba(139,92,246,0.5); }
-  .doc-preview { position: relative; height: 230px; background: #11111a; border-bottom: 1px solid var(--panel-border); overflow: hidden; }
-  .doc-preview iframe { width: 100%; height: 320px; border: 0; transform: translateY(-6px); pointer-events: none; background: #fff; }
-  .doc-preview::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, rgba(12,12,20,0.9)); pointer-events: none; }
-  .doc-tag {
-    position: absolute; top: 14px; left: 14px; z-index: 2;
-    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 5px 11px; border-radius: 7px; background: var(--grad-soft);
-    border: 1px solid rgba(139,92,246,0.35); color: #d9d2ff; backdrop-filter: blur(6px);
-  }
-  .doc-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
-  .doc-body h3 { font-size: 1.22rem; font-weight: 600; margin-bottom: 8px; }
-  .doc-body p { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 20px; flex: 1; }
-  .doc-actions { display: flex; gap: 10px; }
-  .btn {
-    flex: 1; text-align: center; padding: 11px 14px; border-radius: 11px; font-size: 0.88rem; font-weight: 500;
-    transition: all 0.2s; border: 1px solid transparent; cursor: pointer;
-  }
-  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px -10px rgba(139,92,246,0.7); }
-  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
-  .btn-ghost { background: transparent; border-color: var(--panel-border); color: var(--text-dim); }
-  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+  h2 { font-size: clamp(1.55rem, 3.6vw, 2.2rem); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; }
+  .lead { font-size: 1.02rem; color: var(--text-dim); max-width: 760px; }
 
   /* ---------- SUMMARY ---------- */
-  .summary-text { font-size: clamp(1.05rem, 2.2vw, 1.28rem); color: var(--text); font-weight: 300; max-width: 860px; }
+  .summary-text { font-size: clamp(1.05rem, 2.2vw, 1.28rem); color: var(--text); font-weight: 300; max-width: 880px; }
   .summary-text strong { font-weight: 600; }
   .summary-text .hl { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 500; }
 
-  /* ---------- METRICS ---------- */
   .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 38px; }
   @media (max-width: 720px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
   .metric { padding: 22px 20px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); }
@@ -163,37 +124,95 @@
   .chips { display: flex; flex-wrap: wrap; gap: 11px; }
   .chip {
     font-size: 0.86rem; padding: 9px 15px; border-radius: 10px;
-    background: var(--panel); border: 1px solid var(--panel-border); color: var(--text-dim);
-    transition: all 0.2s;
+    background: var(--panel); border: 1px solid var(--panel-border); color: var(--text-dim); transition: all 0.2s;
   }
   .chip:hover { color: var(--text); border-color: rgba(6,182,212,0.45); background: rgba(6,182,212,0.07); }
 
   /* ---------- EXPERIENCE ---------- */
-  .xp { display: flex; flex-direction: column; gap: 0; }
-  .xp-item { position: relative; padding: 26px 0 26px 30px; border-left: 1px solid var(--panel-border); }
+  .xp { display: flex; flex-direction: column; }
+  .xp-item { position: relative; padding: 28px 0 28px 30px; border-left: 1px solid var(--panel-border); }
   .xp-item::before {
-    content: ""; position: absolute; left: -5px; top: 32px; width: 9px; height: 9px; border-radius: 50%;
+    content: ""; position: absolute; left: -5px; top: 34px; width: 9px; height: 9px; border-radius: 50%;
     background: var(--grad); box-shadow: 0 0 12px rgba(139,92,246,0.7);
   }
   .xp-item:last-child { border-left-color: transparent; }
   .xp-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; align-items: baseline; }
-  .xp-role { font-size: 1.12rem; font-weight: 600; }
+  .xp-role { font-size: 1.14rem; font-weight: 600; }
   .xp-co { color: var(--violet); font-weight: 500; }
-  .xp-date { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); }
+  .xp-date { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); white-space: nowrap; }
   .xp-loc { font-size: 0.82rem; color: var(--text-faint); margin-top: 2px; }
-  .xp-desc { font-size: 0.94rem; color: var(--text-dim); margin-top: 12px; }
-  .xp-desc strong { color: var(--text); font-weight: 600; }
+  .xp-bullets { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 13px; }
+  .xp-bullets li { position: relative; padding-left: 20px; font-size: 0.95rem; color: var(--text-dim); }
+  .xp-bullets li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); opacity: 0.8; }
+  .xp-bullets b { color: var(--text); font-weight: 600; }
+  .xp-bullets .win { color: #a5f3c4; font-weight: 600; }
 
-  /* ---------- DEEP DIVE HIGHLIGHTS ---------- */
-  .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  /* ---------- EDUCATION ---------- */
+  .edu { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: baseline;
+    padding: 20px 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); }
+  .edu .deg { font-weight: 600; }
+  .edu .sch { color: var(--violet); }
+  .edu .yr { font-family: var(--mono); font-size: 0.8rem; color: var(--text-faint); }
+
+  /* ---------- DEEP DIVE ---------- */
+  .dd-intro {
+    font-size: 1.12rem; color: var(--text); font-weight: 300; max-width: 840px;
+    padding: 26px 28px; border-radius: var(--radius); background: var(--grad-soft);
+    border: 1px solid rgba(139,92,246,0.25); margin-bottom: 14px;
+  }
+  .dd-intro strong { font-weight: 600; }
+  .dd-block { margin-top: 48px; }
+  .dd-num {
+    font-family: var(--mono); font-size: 0.86rem; color: var(--cyan);
+    border: 1px solid rgba(6,182,212,0.4); border-radius: 8px; padding: 3px 9px; margin-right: 12px;
+  }
+  .dd-h { display: flex; align-items: center; font-size: clamp(1.25rem, 3vw, 1.55rem); font-weight: 600; margin-bottom: 18px; letter-spacing: -0.01em; }
+  .dd-p { font-size: 1rem; color: var(--text-dim); max-width: 840px; margin-bottom: 16px; }
+  .dd-p strong { color: var(--text); font-weight: 600; }
+  .dd-p em { color: var(--text); font-style: italic; }
+
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 22px 0; }
+  @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar { padding: 24px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); }
+  .pillar h4 { font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; }
+  .pillar h4 .badge { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 6px; }
+  .pillar p { font-size: 0.92rem; color: var(--text-dim); }
+
+  .role-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 6px 0 18px; max-width: 840px; }
+  .role-list li { position: relative; padding-left: 22px; font-size: 0.96rem; color: var(--text-dim); }
+  .role-list li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-weight: 700; }
+  .role-list b { color: var(--text); }
+
+  .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 8px 0 4px; }
   @media (max-width: 760px) { .dd-grid { grid-template-columns: 1fr; } }
-  .dd-card { padding: 24px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); transition: border-color 0.2s, transform 0.2s; }
+  .dd-card { padding: 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); transition: border-color 0.2s, transform 0.2s; }
   .dd-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-2px); }
-  .dd-card .kicker { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
-  .dd-card h4 { font-size: 1.06rem; font-weight: 600; margin-bottom: 9px; }
+  .dd-card .kicker { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+  .dd-card h4 { font-size: 1.02rem; font-weight: 600; margin-bottom: 9px; }
   .dd-card p { font-size: 0.9rem; color: var(--text-dim); }
   .dd-card em { color: var(--text); font-style: italic; }
-  .dd-cta { margin-top: 26px; }
+  .dd-card.build .kicker { color: var(--violet); }
+
+  /* tradeoff / hindsight list */
+  .tlist { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+  .titem { padding: 20px 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); border-left: 3px solid var(--violet); }
+  .titem.h { border-left-color: var(--cyan); }
+  .titem h4 { font-size: 1.02rem; font-weight: 600; margin-bottom: 8px; }
+  .titem p { font-size: 0.92rem; color: var(--text-dim); }
+  .titem p strong { color: var(--text); }
+  .titem .verdict { display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); }
+
+  .pattern-note {
+    margin-top: 26px; padding: 22px 26px; border-radius: 14px;
+    background: var(--grad-soft); border: 1px solid rgba(6,182,212,0.3);
+    font-size: 1.02rem; color: var(--text);
+  }
+  .pattern-note strong { font-weight: 600; }
+
+  .closing { margin-top: 46px; padding: 30px 30px; border-radius: var(--radius); background: var(--panel-2); border: 1px solid var(--panel-border); max-width: 880px; }
+  .closing .sec-label { margin-bottom: 14px; }
+  .closing p { font-size: 1.02rem; color: var(--text-dim); }
+  .closing p strong { color: var(--text); font-weight: 600; }
 
   /* ---------- SKILLS ---------- */
   .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -207,9 +226,13 @@
   footer h2 { margin-bottom: 16px; }
   footer .sub { color: var(--text-dim); margin-bottom: 28px; }
   footer .foot-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn { padding: 13px 26px; border-radius: 11px; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; border: 1px solid transparent; cursor: pointer; }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px -10px rgba(139,92,246,0.7); }
+  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border-color: var(--panel-border); color: var(--text-dim); }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
   .copyright { margin-top: 44px; font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); }
 
-  /* reveal */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.in { opacity: 1; transform: none; }
 </style>
@@ -220,10 +243,10 @@
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span> Raju Roopani</a>
     <div class="nav-links">
-      <a href="#documents">Documents</a>
       <a href="#summary">Summary</a>
       <a href="#experience">Experience</a>
       <a href="#deep-dive">Deep Dive</a>
+      <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -259,55 +282,18 @@
   </div>
 </header>
 
-<!-- ======= DOCUMENTS ======= -->
-<section id="documents">
-  <div class="wrap reveal">
-    <div class="sec-label">Featured Documents</div>
-    <h2>Résumé &amp; engineering deep dive</h2>
-    <p class="tagline" style="margin-bottom:30px;font-size:1rem;">Two ways in: the one-page résumé for the quick scan, and a written walkthrough of the load-bearing decisions behind the Teams agentic AI platform.</p>
-    <div class="docs">
-      <div class="doc-card">
-        <div class="doc-preview">
-          <span class="doc-tag">PDF · 2 pages</span>
-          <iframe src="raju-roopani-resume.pdf#toolbar=0&navpanes=0&view=FitH" title="Résumé preview" loading="lazy"></iframe>
-        </div>
-        <div class="doc-body">
-          <h3>Résumé</h3>
-          <p>Principal Engineer · 14+ years of distributed systems and platform engineering; the last 3+ on real-time conversational AI and agentic systems at Microsoft Teams.</p>
-          <div class="doc-actions">
-            <a class="btn btn-primary" href="raju-roopani-resume.pdf" target="_blank" rel="noopener">Open</a>
-            <a class="btn btn-ghost" href="raju-roopani-resume.pdf" download>Download</a>
-          </div>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="doc-preview">
-          <span class="doc-tag">PDF · Deep Dive</span>
-          <iframe src="raju-roopani-ai-deep-dive.pdf#toolbar=0&navpanes=0&view=FitH" title="AI deep dive preview" loading="lazy"></iframe>
-        </div>
-        <div class="doc-body">
-          <h3>AI Project Deep Dive</h3>
-          <p>“Engineering Decisions Behind the Teams Agentic AI Platform” — how I led the program from 0→1 to GA, the load-bearing calls, and a few I'd remake.</p>
-          <div class="doc-actions">
-            <a class="btn btn-primary" href="raju-roopani-ai-deep-dive.pdf" target="_blank" rel="noopener">Open</a>
-            <a class="btn btn-ghost" href="raju-roopani-ai-deep-dive.pdf" download>Download</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ======= SUMMARY ======= -->
 <section id="summary">
   <div class="wrap reveal">
     <div class="sec-label">Summary</div>
     <p class="summary-text">
-      Principal Engineer with <strong>14+ years</strong> of distributed systems and platform engineering at planetary scale.
-      At Microsoft Teams I architected the <span class="hl">Meetings AI layer</span> — real-time RAG over meeting context
-      (transcript, calendar, task systems), context-window optimization, and streaming LLM integration delivering
-      <strong>sub-200ms</strong> AI assistance to millions of daily participants. Full-stack delivery from React/TypeScript
-      frontend to distributed Python/Java backend, with deep ML/Eng collaboration patterns.
+      Principal Engineer with <strong>14+ years</strong> of distributed systems and platform engineering at planetary scale;
+      the last 3+ focused on <span class="hl">real-time conversational AI and agentic systems</span>.
+      At Microsoft Teams I architected the Meetings AI layer — real-time RAG over meeting context (transcript, calendar,
+      task systems), context-window optimization, and streaming LLM integration delivering <strong>sub-200ms</strong> AI
+      assistance to millions of daily participants. Full-stack delivery from React/TypeScript frontend to distributed
+      Python/Java backend, with deep ML/Eng collaboration patterns. Looking to apply real-time RAG and conversational AI
+      product-engineering depth to a focused conversational-AI company.
     </p>
     <div class="metrics">
       <div class="metric"><div class="num">300M+</div><div class="lbl">Daily active users served</div></div>
@@ -331,6 +317,7 @@
       <span class="chip">A2A Protocol</span>
       <span class="chip">Model Context Protocol (MCP)</span>
       <span class="chip">Human-in-the-Loop</span>
+      <span class="chip">No-Code-Adjacent Platforms</span>
       <span class="chip">Full-Stack (React + Python)</span>
       <span class="chip">Distributed Systems</span>
       <span class="chip">Performance Optimization</span>
@@ -344,79 +331,216 @@
 <section id="experience">
   <div class="wrap reveal">
     <div class="sec-label">Experience</div>
-    <h2>Selected work</h2>
+    <h2>Work history</h2>
     <div class="xp" style="margin-top:26px;">
       <div class="xp-item">
         <div class="xp-head">
           <div><span class="xp-role">Principal Software Engineer · AI Tech Lead</span> — <span class="xp-co">Microsoft</span></div>
-          <span class="xp-date">Jul 2018 — Present</span>
+          <span class="xp-date">Jul 2018 — Present · Redmond, WA</span>
         </div>
-        <div class="xp-loc">Teams Platform · Redmond, WA</div>
-        <div class="xp-desc">
-          Built the <strong>real-time conversational AI layer for Teams meetings</strong> — hybrid RAG over a corpus that grows
-          as the meeting happens, context-window optimization, and a streaming LLM tool-use loop at <strong>sub-200ms</strong>
-          perceived latency. Architected a distributed <strong>multi-agent orchestration runtime</strong> (A2A, MCP, HITL,
-          partial-failure isolation) serving 300M+ DAU, and shipped the manifest-based <strong>Teams Agent SDK</strong>
-          (3rd-party agent reliability +3×, support tickets −60%). Cut p95 agent latency 320ms → 85ms and cost/request 40%.
-        </div>
+        <div class="xp-loc">Teams Platform</div>
+        <ul class="xp-bullets">
+          <li><b>Real-Time Conversational AI — Teams Meetings AI:</b> Built the real-time conversational AI layer for Teams meetings — a hybrid RAG retrieval pipeline over meeting context (transcript, calendar, task systems), context-window optimization, and streaming UI integration with the LLM tool-use loop. <span class="win">Sub-200ms perceived latency</span> for AI assistance to millions of daily participants.</li>
+          <li><b>Full-Stack No-Code-Adjacent Platform — Modern Project Online:</b> Built collaborative no-code-style platform interfaces for non-technical PMs — React/TypeScript with Fluent UI Data Grid optimization, GraphQL APIs, dynamic UI configuration. <span class="win">30% page-load reduction</span> via virtualization, memoization, and batch update strategies for millions of enterprise users.</li>
+          <li><b>Agent SDK for Less-Technical Developers:</b> Designed and shipped the Teams Agent SDK — manifest-based declarative agent configuration with opinionated defaults for HITL, retrieval, and error handling. Adopted by 3rd-party developers of varying technical depth. <span class="win">3rd-party agent reliability +3×; developer support tickets −60%.</span></li>
+          <li><b>Multi-Agent Orchestration Runtime:</b> Architected and delivered a real-time distributed multi-agent orchestration runtime supporting Agent-to-Agent (A2A) protocol, Model Context Protocol (MCP), HITL, and partial-failure isolation — serving <span class="win">300M+ daily active users</span>.</li>
+          <li><b>Latency, Cost &amp; Quality Optimization:</b> Reduced p95 agent runtime latency from 320ms to <span class="win">85ms</span> via event-driven coordination, retrieval caching, connection pooling, and tiered model routing. Cut <span class="win">cost per request by 40%</span>.</li>
+          <li><b>ML / Eng Collaboration:</b> Built the integration patterns — eval pipelines, observability instrumentation, progressive rollout — that let AI Research ship model improvements without product regression. Cross-functional TL across Engineering, Product, Design, and AI Research.</li>
+        </ul>
       </div>
       <div class="xp-item">
         <div class="xp-head">
-          <div><span class="xp-role">Member of Technical Staff · Platform Engineering</span> — <span class="xp-co">Envestnet Yodlee</span></div>
-          <span class="xp-date">Apr 2016 — Jul 2018</span>
+          <div><span class="xp-role">Member of Technical Staff · Platform Engineering</span> — <span class="xp-co">Envestnet Yodlee Infotech</span></div>
+          <span class="xp-date">Apr 2016 — Jul 2018 · Bengaluru, India</span>
         </div>
-        <div class="xp-loc">Bengaluru, India</div>
-        <div class="xp-desc">
-          Designed high-throughput REST APIs aggregating financial data across banks, processing <strong>10M+ transactions/day</strong>
-          on event-driven Kafka pipelines (Java Spring Boot). Built a framework-agnostic integration platform bridging 100+ heterogeneous
-          bank APIs, and an <strong>OAuth 2.0 / PSD2-compliant</strong> client framework for EU Open Banking.
-        </div>
+        <ul class="xp-bullets">
+          <li><b>High-Throughput REST APIs:</b> Designed and developed REST APIs aggregating financial data across banks and third-party providers, processing <span class="win">10M+ transactions per day</span> on event-driven Kafka pipelines using Java Spring Boot.</li>
+          <li><b>Framework-Agnostic Integration Platform:</b> Built integrations bridging hundreds of heterogeneous external systems (100+ bank APIs with varying schemas and custom auth) into a unified runtime.</li>
+          <li><b>OAuth 2.0 + PSD2 Compliance:</b> Architected and implemented an OAuth 2.0 client framework in Java Spring MVC and Hibernate, enabling PSD2-compliant integration with EU Open Banking APIs across multiple European markets.</li>
+        </ul>
       </div>
       <div class="xp-item">
         <div class="xp-head">
-          <div><span class="xp-role">Software Engineer · Build &amp; Automation Tooling</span> — <span class="xp-co">ARM</span></div>
-          <span class="xp-date">Jan 2012 — Apr 2016</span>
+          <div><span class="xp-role">Software Engineer · Build &amp; Automation Tooling</span> — <span class="xp-co">ARM Embedded Technologies</span></div>
+          <span class="xp-date">Jan 2012 — Apr 2016 · Bengaluru, India</span>
         </div>
-        <div class="xp-loc">Bengaluru, India</div>
-        <div class="xp-desc">
-          Built automation tooling for Physical IP modeling and validation flows — verification algorithms, efficient build
-          pipelines, reusable frameworks. Reduced manual verification effort ~60% and accelerated design-to-tape-out cycles.
-        </div>
+        <ul class="xp-bullets">
+          <li><b>Build Systems &amp; Automation Tooling:</b> Designed and built automation tooling for Physical IP modeling and validation flows — complex verification algorithms, efficient build pipelines, and reusable tooling frameworks. <span class="win">Reduced manual verification effort ~60%</span> and accelerated hardware design-to-tape-out cycles.</li>
+        </ul>
       </div>
+    </div>
+    <div class="sec-label" style="margin-top:40px;">Education</div>
+    <div class="edu">
+      <div><span class="deg">B.E. — Electronics &amp; Communications Engineering</span> · <span class="sch">Osmania University</span></div>
+      <span class="yr">2007 — 2011</span>
     </div>
   </div>
 </section>
 
-<!-- ======= DEEP DIVE HIGHLIGHTS ======= -->
+<!-- ======= DEEP DIVE ======= -->
 <section id="deep-dive">
   <div class="wrap reveal">
-    <div class="sec-label">From the Deep Dive</div>
+    <div class="sec-label">Engineering Deep Dive</div>
     <h2>Engineering decisions behind the Teams agentic AI platform</h2>
-    <p class="tagline" style="font-size:1rem;margin-bottom:30px;">The full write-up is a story of load-bearing decisions — what I reused, what I built, the tradeoffs I lived with, and what I'd do differently. A few of the calls:</p>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="kicker">Reuse, deliberately</div>
-        <h4>Thin model interface over Azure OpenAI + Claude</h4>
-        <p>Never entertained training our own — model quality shifts month-to-month. The abstraction stayed thin: swap providers, tier routing by complexity (−40% cost/request), unify telemetry. Explicitly <em>not</em> a framework.</p>
+    <p class="lead" style="margin-bottom:24px;">A walkthrough of how I designed, built, and shipped real-time conversational AI inside Microsoft Teams — and the calls I made (and a few I'd remake) along the way.</p>
+    <div class="dd-intro">
+      This isn't a list of frameworks. It's the story of one program I led from <strong>0→1 to GA</strong> inside Microsoft Teams —
+      what we were trying to do, the load-bearing decisions I made along the way, and the few I'd revisit if I were starting over.
+      Where the decisions mattered I've tried to show the reasoning, not just the outcome.
+    </div>
+
+    <!-- 1 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">01</span> What the system does, and why it matters</div>
+      <p class="dd-p">Microsoft Teams serves 300M+ daily active users, and meetings are the highest-bandwidth knowledge exchange in most enterprises. Before this program, that bandwidth was lossy: transcripts existed but were post-hoc artifacts, action items walked out the door with whoever happened to be writing them down, and most of the context of the meeting died with the meeting itself. The system I led has two tightly-coupled pieces.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <h4><span class="badge">Piece 1</span>The Meetings AI layer</h4>
+          <p>Real-time conversational AI that runs alongside a live meeting. It listens to the streaming transcript, retrieves relevant context (calendar, prior meetings, task systems, chat history), and offers in-meeting assistance — answering questions, drafting follow-ups, surfacing related decisions — with sub-200ms perceived latency. Under the hood it's a streaming LLM tool-use loop wrapped around a hybrid RAG pipeline reading a corpus that is literally growing as the meeting happens.</p>
+        </div>
+        <div class="pillar">
+          <h4><span class="badge">Piece 2</span>The Agent Extensibility Platform</h4>
+          <p>A runtime, SDK, and set of APIs that lets internal and external developers build agents that live inside Teams — at-mentionable, multi-agent, with the right primitives for context propagation, turn-taking, human-in-the-loop intervention, and partial-failure isolation. It speaks A2A (agent-to-agent) and MCP (Model Context Protocol) as first-class. At GA it backed agents reaching the full 300M+ DAU surface.</p>
+        </div>
       </div>
-      <div class="dd-card">
-        <div class="kicker">Build, because nothing fit</div>
-        <h4>A meeting-shaped orchestration runtime</h4>
-        <p>Open frameworks were single-process, single-tenant, batch-shaped. We needed distributed, low-latency, turn-taking that respects the floor, idempotent retries, and partial-failure isolation so one bad agent can't take down the meeting.</p>
-      </div>
-      <div class="dd-card">
-        <div class="kicker">The piece I'm proudest of</div>
-        <h4>A declarative agent manifest schema</h4>
-        <p>Code-first SDKs assumed engineers. Ours targeted PMs and IT admins too — specify intent, retrieval surfaces, permissions, HITL defaults, and the runtime fills in correct behavior. Reliability +3×, support tickets −60%, because the right defaults were locked into the shape.</p>
-      </div>
-      <div class="dd-card">
-        <div class="kicker">What I'd do differently</div>
-        <h4>The eval harness should have come first</h4>
-        <p>We shipped the runtime to GA before a real eval harness and caught regressions in production an eval suite would have flagged on commit. Now: eval as a P0 deliverable alongside the first model integration — <em>delay the irreversible, accelerate the reversible.</em></p>
+      <p class="dd-p"><strong>Why it mattered.</strong> The difference between "AI that helps you" and "AI that lives where you already work" is enormous in enterprise. The latter compounds — your tools get smarter together — and Teams is the only surface where a meeting-aware AI can be born without forcing users to switch context.</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">02</span> My role</div>
+      <p class="dd-p">Tech lead and lead architect across both pieces. IC role, not management. Across the program I worked with ~12–15 engineers (plus a separate AI Research org) and was personally on the hook for:</p>
+      <ul class="role-list">
+        <li>The <b>orchestration runtime architecture</b>: turn-taking protocol, context propagation, failure model, tenancy story.</li>
+        <li>The <b>Agent SDK surface</b>: what it feels like for a third-party developer to build an agent that behaves correctly under the runtime's constraints.</li>
+        <li>The <b>real-time RAG pipeline</b>: what retrieval shape actually works over a corpus that doesn't exist when the meeting starts.</li>
+        <li>The <b>ML / Eng integration contract</b>: the boundary between what AI Research owns (models, prompts, evals) and what Engineering owns (latency, reliability, rollout) — and the substrate that lets both sides ship independently.</li>
+        <li><b>Binding architectural decisions</b> where teams disagreed.</li>
+      </ul>
+      <p class="dd-p">Concretely: I wrote the load-bearing design docs, prototyped the hardest pieces (runtime turn-taking, streaming RAG) myself before handing them off, reviewed PRs across the runtime, and spent a lot of time saying no to features so we could ship a thing that worked.</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">03</span> Where I reused what existed — and why</div>
+      <p class="dd-p">The fastest way to ship a bad AI system was to over-build. The default move every quarter was to reach for what already existed and spend our build budget on the things only we could build.</p>
+      <div class="dd-grid">
+        <div class="dd-card">
+          <div class="kicker">Reuse</div>
+          <h4>Foundation models — Azure OpenAI &amp; Anthropic Claude</h4>
+          <p>Behind a thin internal interface. I never seriously entertained training our own — model quality changes month-to-month; commit to one in your architecture and you pay for it for years. The layer was deliberately thin: swap providers, route by task complexity (tiered routing later cut cost/request 40%), unify telemetry. It explicitly did <em>not</em> try to be a "framework" — those grow tentacles.</p>
+        </div>
+        <div class="dd-card">
+          <div class="kicker">Reuse</div>
+          <h4>Vector retrieval — managed services on Azure</h4>
+          <p>Hosting our own index early would have been a multi-quarter distraction for marginal gain. Meeting traffic is bursty and dense; managed gave us cold-start in seconds. We revisited this only when retrieval latency on the long tail started showing up in evals.</p>
+        </div>
+        <div class="dd-card">
+          <div class="kicker">Reuse</div>
+          <h4>Speech-to-text — Azure Speech Services</h4>
+          <p>ASR is a domain of its own with a dedicated org. I had zero interest in building expertise we didn't need to own.</p>
+        </div>
+        <div class="dd-card">
+          <div class="kicker">Reuse</div>
+          <h4>MCP &amp; A2A as protocol standards</h4>
+          <p>A build/buy decision in disguise. Teams is big enough that we could have invented our own protocols and forced adoption. I deliberately didn't — developers were already converging on MCP, and "Teams works with the protocol you already speak" is a far stronger pitch. It cost some optimization headroom and gave us a much larger ecosystem on day one.</p>
+        </div>
+        <div class="dd-card">
+          <div class="kicker">Reuse, then discard</div>
+          <h4>AutoGen for the earliest prototypes</h4>
+          <p>We used it to learn what multi-agent orchestration <em>should</em> feel like before committing to our own runtime. We discarded it before GA, but designing from a blank page without that grounding would have led to a worse design. The cost of throwing away the prototype was much smaller than the cost of skipping the learning.</p>
+        </div>
       </div>
     </div>
-    <div class="dd-cta">
-      <a class="btn btn-primary" style="display:inline-block;flex:none;padding:13px 26px;" href="raju-roopani-ai-deep-dive.pdf" target="_blank" rel="noopener">Read the full deep dive →</a>
+
+    <!-- 4 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">04</span> Where I built from scratch — and why</div>
+      <p class="dd-p">Four pieces, in roughly the order we admitted we had to build them.</p>
+      <div class="dd-grid">
+        <div class="dd-card build">
+          <div class="kicker">Build · the call I argued hardest for</div>
+          <h4>The orchestration runtime</h4>
+          <p>AutoGen, LangGraph, and the open frameworks at the time were single-process, single-tenant, and batch-shaped. We needed distributed, multi-tenant, low-latency, and meeting-shaped: agents joining and leaving as participants do, turn-taking that respects who has the floor, idempotent retries (participants re-trigger under flaky networks), and partial-failure isolation so one misbehaving 3rd-party agent couldn't take down the meeting. There was no honest "buy" option — so we built one, event-driven, with a turn-taking protocol I wrote up as a small internal spec and a failure model that treated partial degradation as the normal case.</p>
+        </div>
+        <div class="dd-card build">
+          <div class="kicker">Build</div>
+          <h4>A real-time RAG pipeline over the live transcript</h4>
+          <p>Off-the-shelf RAG assumes a static corpus. We needed retrieval over a corpus that grew as the meeting progressed, where "relevance" depends on speaker, topic shifts, and time — a customer mentioned in minute 3 might be what the agent needs in minute 27. We built a streaming chunker respecting semantic boundaries (utterance + speaker + topic), a hybrid retrieval layer combining embedding similarity with structured filters (calendar links, task IDs, participant identity), and a context-window manager that knew which retrieved items were still load-bearing vs. could be evicted.</p>
+        </div>
+        <div class="dd-card build">
+          <div class="kicker">Build · the piece I'm proudest of</div>
+          <h4>The Agent SDK manifest schema</h4>
+          <p>Existing SDKs were code-first — written for engineers comfortable instantiating an <em>Agent</em> class. Our 3rd-party population was broader, including PMs and customer-org IT admins. The SDK had to be declarative: a manifest where you specify intent, retrieval surfaces, tool permissions, and HITL defaults, and the runtime fills in correct behavior. When we measured it, reliability went up 3× and support tickets dropped 60% — almost entirely because the right defaults were locked into the manifest shape rather than left as opportunities for misuse.</p>
+        </div>
+        <div class="dd-card build">
+          <div class="kicker">Build</div>
+          <h4>The evaluation &amp; observability harness</h4>
+          <p>Model providers' tooling stops at the model. We needed full-loop eval — retrieval quality, end-to-end p95 latency, agent behavior under turn-taking pressure, regression detection when AI Research rolled new prompts or models, and progressive rollout gates that could halt before regressions reached production. We built it — partly because it didn't exist, mostly because owning it made the AI Research / Engineering contract concrete: Research could change anything as long as it cleared the eval harness.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">05</span> Tradeoffs I made — and lived with</div>
+      <div class="tlist">
+        <div class="titem">
+          <h4>Streaming UI vs. complete-response UI</h4>
+          <p>Streaming tokens as the model produced them dropped perceived latency from ~3s to <strong>~200ms</strong>. The cost: a UI that now had to handle partial states, mid-stream retraction, and graceful degradation when the stream dropped. In a meeting — where the AI competes with humans speaking — feeling instant matters far more than feeling complete.</p>
+          <span class="verdict">// I still think that was right.</span>
+        </div>
+        <div class="titem">
+          <h4>Tiered model routing</h4>
+          <p>Routing simple intents to a smaller model and reserving the frontier model for harder calls cut cost/request <strong>40%</strong>. The cost: a routing classifier that could itself be wrong, and a test surface that grew with the number of tiers. The mitigation was the eval harness — every routing decision scored offline before it shipped.</p>
+          <span class="verdict">// Without evals first, this would have been a bad call.</span>
+        </div>
+        <div class="titem">
+          <h4>HITL on by default in the SDK</h4>
+          <p>Every agent the SDK produced had a human-in-the-loop confirmation step by default for any action writing to a customer system. It made agents feel slower and chattier — the tradeoff was conservative-by-default for enterprise customers with no patience for AI acting incorrectly on their behalf. The escape hatch (explicit opt-out per action) was available, but you had to ask for it.</p>
+          <span class="verdict">// I'd make the same call again.</span>
+        </div>
+        <div class="titem">
+          <h4>Embracing MCP &amp; A2A early</h4>
+          <p>This cost some optimization (an internal protocol could pack data more efficiently) and locked us into a moving target — the standards evolved under us. The win was ecosystem: external developers showed up speaking our protocols on day one. The cost showed up later as compatibility work when the standards shifted.</p>
+          <span class="verdict">// Net positive, but with eyes open.</span>
+        </div>
+        <div class="titem">
+          <h4>Building our own runtime</h4>
+          <p>The decision I'd defend most strongly and second-guess most often. For: no off-the-shelf framework fit our shape, so we'd have forked one anyway. Against: we now own and maintain a runtime forever. I keep watching the open-source space — if a community-maintained runtime ever catches up to our needs, the right move is to migrate and stop carrying the maintenance load.</p>
+          <span class="verdict">// Correct at the time. Still watching.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="dd-block">
+      <div class="dd-h"><span class="dd-num">06</span> What I'd do differently in hindsight</div>
+      <p class="dd-p">Three things, in increasing order of "I should have known better."</p>
+      <div class="tlist">
+        <div class="titem h">
+          <h4>The eval harness should have come first, not third</h4>
+          <p>We shipped the orchestration runtime and the first agents to GA before a real evaluation harness was in place, and caught a few embarrassing regressions in production that an eval suite would have flagged on commit. The classic mistake: eval feels like infrastructure investment, and infrastructure loses to features under shipping pressure. I'd now treat the eval harness as a <strong>P0 deliverable in the same release as the first real model integration</strong>, not a fast-follow.</p>
+        </div>
+        <div class="titem h">
+          <h4>We over-built the multi-tenant story too early</h4>
+          <p>I had a real bias toward "design for the platform we'll be in two years." The runtime carried complexity — tenant isolation primitives, per-tenant rate limits, multi-tenant config surfaces — before any tenant needed it. If I were doing it again, I'd ship a <strong>single-tenant runtime first</strong>, get one use case completely solid, and only then generalize. We could have shipped two months earlier and learned more from real usage than from the extra abstraction.</p>
+        </div>
+        <div class="titem h">
+          <h4>I should have watched the open-source space longer before committing to our own runtime</h4>
+          <p>The decision to build was right at the moment we made it — but I made it earlier than I had to. Another quarter of watching what the community shipped might have let us base our runtime on something rather than starting from a blank page. The kind of decision where being right too early is almost as expensive as being wrong.</p>
+        </div>
+      </div>
+      <div class="pattern-note">
+        A pattern across all three: <strong>delay the irreversible decisions, accelerate the reversible ones.</strong>
+        I knew this in principle. Shipping under pressure made it harder to live by than I'd like to admit.
+      </div>
+    </div>
+
+    <!-- Closing -->
+    <div class="closing">
+      <div class="sec-label">Closing note</div>
+      <p>The pieces of this program I'm proudest of aren't the technologies. They're the <strong>contracts</strong>: the eval harness as the boundary between AI Research and Engineering, the manifest as the boundary between the platform and 3rd-party developers, the turn-taking protocol as the boundary between agents. Each one took an ambiguous, negotiation-heavy interface and turned it into something a machine could check — and that's mostly what let us ship at scale without the program collapsing under coordination cost. <em>Happy to go deeper on any of this in conversation.</em></p>
     </div>
   </div>
 </section>
@@ -445,11 +569,11 @@
       </div>
       <div class="skill-grp">
         <h5>Backend &amp; Distributed</h5>
-        <p>REST · GraphQL · gRPC · WebSockets · Microservices · Event-Driven Architecture · Fault Tolerance · Idempotency · Partial-Failure Isolation</p>
+        <p>REST · GraphQL · gRPC · WebSockets · Microservices · Event-Driven Architecture · Fault Tolerance · Idempotency · Horizontal Scalability · Partial-Failure Isolation</p>
       </div>
       <div class="skill-grp">
         <h5>Cloud, Data &amp; Messaging</h5>
-        <p>Azure (Service Bus, Functions, Cosmos DB, OpenAI) · Docker · Kafka · Cosmos DB · MySQL · MongoDB · Oracle</p>
+        <p>Azure (Service Bus, Functions, Cosmos DB, OpenAI) · Docker · Apache Kafka · Cosmos DB · MySQL · MongoDB · Oracle</p>
       </div>
     </div>
   </div>
@@ -462,10 +586,9 @@
     <h2>Let's build conversational AI together.</h2>
     <p class="sub">Open to focused conversational-AI work. Happy to go deeper on any of the deep dive in conversation.</p>
     <div class="foot-links">
-      <a class="btn btn-primary" style="flex:none;padding:13px 26px;" href="mailto:Raju.Roopani01@gmail.com">Email me</a>
-      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="https://linkedin.com/in/rajuroopani06" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="https://github.com/rajuroopani" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="raju-roopani-resume.pdf" download>Résumé (PDF)</a>
+      <a class="btn btn-primary" href="mailto:Raju.Roopani01@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/rajuroopani06" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/rajuroopani" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="copyright">© <span id="yr"></span> Raju Roopani · Built with care · Redmond, WA</div>
   </div>
@@ -473,10 +596,9 @@
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
-  // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>
 </body>
