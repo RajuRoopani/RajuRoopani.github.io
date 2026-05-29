@@ -10,6 +10,9 @@
 <meta property="og:description" content="Real-time RAG, agentic orchestration, and production AI at scale. The Meetings AI layer and Agent Extensibility Platform inside Microsoft Teams (300M+ DAU)." />
 <meta property="og:type" content="profile" />
 <meta property="og:url" content="https://rajuroopani.github.io/" />
+<meta property="og:image" content="https://rajuroopani.github.io/raju-avatar.jpg" />
+<link rel="icon" type="image/jpeg" href="raju-avatar.jpg" />
+<link rel="apple-touch-icon" href="raju-avatar.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -98,6 +101,36 @@
   }
   .chip-link:hover { color: var(--text); border-color: rgba(139,92,246,0.5); background: rgba(139,92,246,0.08); transform: translateY(-1px); }
   .chip-link svg { width: 15px; height: 15px; opacity: 0.85; }
+
+  /* hero two-column + portrait */
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 34px; } header { padding-top: 60px; } .hero-portrait { order: -1; } }
+  .hero-portrait { display: flex; justify-content: center; }
+  .portrait-wrap { position: relative; }
+  .portrait-ring {
+    position: relative; width: 270px; height: 270px; border-radius: 50%;
+    padding: 4px; background: var(--grad);
+    box-shadow: 0 34px 80px -28px rgba(139,92,246,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+    animation: floaty 6.5s ease-in-out infinite;
+  }
+  @media (max-width: 860px) { .portrait-ring { width: 196px; height: 196px; } }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .portrait-ring::before {
+    content: ""; position: absolute; inset: -16px; border-radius: 50%;
+    background: conic-gradient(from 0deg, #8b5cf6, #06b6d4, #6366f1, #8b5cf6);
+    filter: blur(28px); opacity: 0.42; z-index: -1; animation: spin 16s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .portrait-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; background: #11111a; }
+  .status-badge {
+    position: absolute; bottom: 16px; right: 2px; z-index: 2;
+    display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 999px;
+    background: rgba(7,7,11,0.86); backdrop-filter: blur(8px);
+    border: 1px solid rgba(165,243,196,0.35); font-size: 0.76rem; color: #c8f7d8; font-weight: 500;
+    box-shadow: 0 8px 24px -10px rgba(0,0,0,0.7);
+  }
+  .status-badge .live { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399; animation: pulse 2s ease-in-out infinite; }
+  .brand .nav-ava { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(139,92,246,0.6); }
 
   /* ---------- SECTION ---------- */
   section { padding: 52px 0; }
@@ -241,7 +274,7 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top"><span class="dot"></span> Raju Roopani</a>
+    <a class="brand" href="#top"><img class="nav-ava" src="raju-avatar.jpg" alt="Raju Roopani" /> Raju Roopani</a>
     <div class="nav-links">
       <a href="#summary">Summary</a>
       <a href="#experience">Experience</a>
@@ -253,7 +286,8 @@
 </nav>
 
 <header id="top">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
     <span class="eyebrow">Principal Engineer · Conversational AI</span>
     <h1>Raju <span class="grad">Roopani</span></h1>
     <p class="tagline">
@@ -278,6 +312,15 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Redmond, WA
       </span>
+    </div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-wrap">
+        <div class="portrait-ring">
+          <img src="raju-avatar.jpg" alt="Raju Roopani — Principal Engineer, Conversational AI" width="640" height="640" />
+        </div>
+        <span class="status-badge"><span class="live"></span> Open to work</span>
+      </div>
     </div>
   </div>
 </header>
