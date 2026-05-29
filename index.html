@@ -1,22 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video app sample</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Raju Roopani — Principal Engineer · Conversational AI</title>
+<meta name="description" content="Raju Roopani — Principal Engineer focused on real-time conversational AI and agentic systems. 14+ years building distributed platforms at planetary scale." />
+<meta name="author" content="Raju Roopani" />
+<!-- Open Graph -->
+<meta property="og:title" content="Raju Roopani — Principal Engineer · Conversational AI" />
+<meta property="og:description" content="Real-time RAG, agentic orchestration, and production AI at scale. Built the Meetings AI layer and Agent Extensibility Platform inside Microsoft Teams (300M+ DAU)." />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="https://rajuroopani.github.io/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07070b;
+    --bg-2: #0c0c14;
+    --panel: rgba(255, 255, 255, 0.035);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --text: #e8e8f0;
+    --text-dim: #9a9ab0;
+    --text-faint: #6a6a82;
+    --violet: #8b5cf6;
+    --cyan: #06b6d4;
+    --grad: linear-gradient(120deg, #8b5cf6 0%, #6366f1 45%, #06b6d4 100%);
+    --grad-soft: linear-gradient(120deg, rgba(139,92,246,0.18), rgba(6,182,212,0.12));
+    --radius: 18px;
+    --mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ambient gradient field */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(60% 50% at 15% 0%, rgba(139,92,246,0.16), transparent 60%),
+      radial-gradient(50% 45% at 90% 10%, rgba(6,182,212,0.12), transparent 60%),
+      radial-gradient(70% 60% at 50% 110%, rgba(99,102,241,0.10), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(7,7,11,0.6);
+    border-bottom: 1px solid var(--panel-border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.02em; }
+  .brand .dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--grad);
+    box-shadow: 0 0 16px rgba(139,92,246,0.8);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(0.82); } }
+  .nav-links { display: flex; gap: 26px; font-size: 0.86rem; color: var(--text-dim); }
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ---------- HERO ---------- */
+  header { padding: 92px 0 64px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--cyan); margin-bottom: 22px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--cyan); opacity: 0.7; }
+  h1 {
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  h1 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: var(--text-dim); max-width: 720px; font-weight: 300; }
+  .tagline strong { color: var(--text); font-weight: 500; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .chip-link {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--panel); border: 1px solid var(--panel-border);
+    font-size: 0.86rem; color: var(--text-dim); transition: all 0.2s;
+  }
+  .chip-link:hover { color: var(--text); border-color: rgba(139,92,246,0.5); background: rgba(139,92,246,0.08); transform: translateY(-1px); }
+  .chip-link svg { width: 15px; height: 15px; opacity: 0.85; }
+
+  /* ---------- SECTION ---------- */
+  section { padding: 56px 0; }
+  .sec-label {
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint); margin-bottom: 26px; display: flex; align-items: center; gap: 12px;
+  }
+  .sec-label::after { content: ""; flex: 1; height: 1px; background: var(--panel-border); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; }
+
+  /* ---------- DOCUMENT CARDS ---------- */
+  .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 820px) { .docs { grid-template-columns: 1fr; } }
+  .doc-card {
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--panel-border); background: var(--panel);
+    display: flex; flex-direction: column; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .doc-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.45); box-shadow: 0 24px 60px -28px rgba(139,92,246,0.5); }
+  .doc-preview { position: relative; height: 230px; background: #11111a; border-bottom: 1px solid var(--panel-border); overflow: hidden; }
+  .doc-preview iframe { width: 100%; height: 320px; border: 0; transform: translateY(-6px); pointer-events: none; background: #fff; }
+  .doc-preview::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, rgba(12,12,20,0.9)); pointer-events: none; }
+  .doc-tag {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 7px; background: var(--grad-soft);
+    border: 1px solid rgba(139,92,246,0.35); color: #d9d2ff; backdrop-filter: blur(6px);
+  }
+  .doc-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .doc-body h3 { font-size: 1.22rem; font-weight: 600; margin-bottom: 8px; }
+  .doc-body p { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 20px; flex: 1; }
+  .doc-actions { display: flex; gap: 10px; }
+  .btn {
+    flex: 1; text-align: center; padding: 11px 14px; border-radius: 11px; font-size: 0.88rem; font-weight: 500;
+    transition: all 0.2s; border: 1px solid transparent; cursor: pointer;
+  }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px -10px rgba(139,92,246,0.7); }
+  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border-color: var(--panel-border); color: var(--text-dim); }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+  /* ---------- SUMMARY ---------- */
+  .summary-text { font-size: clamp(1.05rem, 2.2vw, 1.28rem); color: var(--text); font-weight: 300; max-width: 860px; }
+  .summary-text strong { font-weight: 600; }
+  .summary-text .hl { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 500; }
+
+  /* ---------- METRICS ---------- */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 38px; }
+  @media (max-width: 720px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric { padding: 22px 20px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); }
+  .metric .num { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 700; line-height: 1; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .metric .lbl { font-size: 0.82rem; color: var(--text-dim); margin-top: 8px; }
+
+  /* ---------- COMPETENCIES ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 11px; }
+  .chip {
+    font-size: 0.86rem; padding: 9px 15px; border-radius: 10px;
+    background: var(--panel); border: 1px solid var(--panel-border); color: var(--text-dim);
+    transition: all 0.2s;
+  }
+  .chip:hover { color: var(--text); border-color: rgba(6,182,212,0.45); background: rgba(6,182,212,0.07); }
+
+  /* ---------- EXPERIENCE ---------- */
+  .xp { display: flex; flex-direction: column; gap: 0; }
+  .xp-item { position: relative; padding: 26px 0 26px 30px; border-left: 1px solid var(--panel-border); }
+  .xp-item::before {
+    content: ""; position: absolute; left: -5px; top: 32px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--grad); box-shadow: 0 0 12px rgba(139,92,246,0.7);
+  }
+  .xp-item:last-child { border-left-color: transparent; }
+  .xp-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+  .xp-role { font-size: 1.12rem; font-weight: 600; }
+  .xp-co { color: var(--violet); font-weight: 500; }
+  .xp-date { font-family: var(--mono); font-size: 0.78rem; color: var(--text-faint); }
+  .xp-loc { font-size: 0.82rem; color: var(--text-faint); margin-top: 2px; }
+  .xp-desc { font-size: 0.94rem; color: var(--text-dim); margin-top: 12px; }
+  .xp-desc strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- DEEP DIVE HIGHLIGHTS ---------- */
+  .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .dd-grid { grid-template-columns: 1fr; } }
+  .dd-card { padding: 24px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); transition: border-color 0.2s, transform 0.2s; }
+  .dd-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-2px); }
+  .dd-card .kicker { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+  .dd-card h4 { font-size: 1.06rem; font-weight: 600; margin-bottom: 9px; }
+  .dd-card p { font-size: 0.9rem; color: var(--text-dim); }
+  .dd-card em { color: var(--text); font-style: italic; }
+  .dd-cta { margin-top: 26px; }
+
+  /* ---------- SKILLS ---------- */
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .skills { grid-template-columns: 1fr; } }
+  .skill-grp { padding: 20px 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--panel-border); }
+  .skill-grp h5 { font-size: 0.82rem; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--violet); margin-bottom: 12px; }
+  .skill-grp p { font-size: 0.9rem; color: var(--text-dim); }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 64px 0 80px; border-top: 1px solid var(--panel-border); margin-top: 40px; text-align: center; }
+  footer h2 { margin-bottom: 16px; }
+  footer .sub { color: var(--text-dim); margin-bottom: 28px; }
+  footer .foot-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .copyright { margin-top: 44px; font-family: var(--mono); font-size: 0.74rem; color: var(--text-faint); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
 </head>
 <body>
-    <h1 class="app-title">Video app sample</h1>
-    <div class="horizontal">
-      <div class="filter" id="filter-half">
-        <a class="thumbnail"></a>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span> Raju Roopani</a>
+    <div class="nav-links">
+      <a href="#documents">Documents</a>
+      <a href="#summary">Summary</a>
+      <a href="#experience">Experience</a>
+      <a href="#deep-dive">Deep Dive</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <span class="eyebrow">Principal Engineer · Conversational AI</span>
+    <h1>Raju <span class="grad">Roopani</span></h1>
+    <p class="tagline">
+      I build <strong>real-time conversational AI</strong> and <strong>agentic systems</strong> at planetary scale —
+      from the <span style="color:var(--text)">Meetings AI layer</span> to the
+      <span style="color:var(--text)">Agent Extensibility Platform</span> inside Microsoft Teams, serving <strong>300M+ daily users</strong>.
+    </p>
+    <div class="meta-row">
+      <a class="chip-link" href="mailto:Raju.Roopani01@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        Raju.Roopani01@gmail.com
+      </a>
+      <a class="chip-link" href="https://linkedin.com/in/rajuroopani06" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17.34V10.4H6.03v6.94h2.31zM7.19 9.4a1.34 1.34 0 1 0 0-2.68 1.34 1.34 0 0 0 0 2.68zM18 17.34v-3.8c0-2.03-1.08-2.97-2.53-2.97-1.17 0-1.69.64-1.98 1.09v-.94h-2.31v6.94h2.31v-3.87c0-.2.01-.41.07-.55.16-.41.53-.83 1.16-.83.82 0 1.15.62 1.15 1.54v3.71H18z"/></svg>
+        in/rajuroopani06
+      </a>
+      <a class="chip-link" href="https://github.com/rajuroopani" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        github.com/rajuroopani
+      </a>
+      <span class="chip-link" style="cursor:default">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Redmond, WA
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ======= DOCUMENTS ======= -->
+<section id="documents">
+  <div class="wrap reveal">
+    <div class="sec-label">Featured Documents</div>
+    <h2>Résumé &amp; engineering deep dive</h2>
+    <p class="tagline" style="margin-bottom:30px;font-size:1rem;">Two ways in: the one-page résumé for the quick scan, and a written walkthrough of the load-bearing decisions behind the Teams agentic AI platform.</p>
+    <div class="docs">
+      <div class="doc-card">
+        <div class="doc-preview">
+          <span class="doc-tag">PDF · 2 pages</span>
+          <iframe src="raju-roopani-resume.pdf#toolbar=0&navpanes=0&view=FitH" title="Résumé preview" loading="lazy"></iframe>
+        </div>
+        <div class="doc-body">
+          <h3>Résumé</h3>
+          <p>Principal Engineer · 14+ years of distributed systems and platform engineering; the last 3+ on real-time conversational AI and agentic systems at Microsoft Teams.</p>
+          <div class="doc-actions">
+            <a class="btn btn-primary" href="raju-roopani-resume.pdf" target="_blank" rel="noopener">Open</a>
+            <a class="btn btn-ghost" href="raju-roopani-resume.pdf" download>Download</a>
+          </div>
+        </div>
       </div>
-      <div class="filter" id="filter-gray">
-        <a class="thumbnail"></a>
+      <div class="doc-card">
+        <div class="doc-preview">
+          <span class="doc-tag">PDF · Deep Dive</span>
+          <iframe src="raju-roopani-ai-deep-dive.pdf#toolbar=0&navpanes=0&view=FitH" title="AI deep dive preview" loading="lazy"></iframe>
+        </div>
+        <div class="doc-body">
+          <h3>AI Project Deep Dive</h3>
+          <p>“Engineering Decisions Behind the Teams Agentic AI Platform” — how I led the program from 0→1 to GA, the load-bearing calls, and a few I'd remake.</p>
+          <div class="doc-actions">
+            <a class="btn btn-primary" href="raju-roopani-ai-deep-dive.pdf" target="_blank" rel="noopener">Open</a>
+            <a class="btn btn-ghost" href="raju-roopani-ai-deep-dive.pdf" download>Download</a>
+          </div>
+        </div>
       </div>
     </div>
-    <link rel="stylesheet" type="text/css" href="./src/index.css" />
-    <script src="./src/index.js" type="module"></script>
+  </div>
+</section>
+
+<!-- ======= SUMMARY ======= -->
+<section id="summary">
+  <div class="wrap reveal">
+    <div class="sec-label">Summary</div>
+    <p class="summary-text">
+      Principal Engineer with <strong>14+ years</strong> of distributed systems and platform engineering at planetary scale.
+      At Microsoft Teams I architected the <span class="hl">Meetings AI layer</span> — real-time RAG over meeting context
+      (transcript, calendar, task systems), context-window optimization, and streaming LLM integration delivering
+      <strong>sub-200ms</strong> AI assistance to millions of daily participants. Full-stack delivery from React/TypeScript
+      frontend to distributed Python/Java backend, with deep ML/Eng collaboration patterns.
+    </p>
+    <div class="metrics">
+      <div class="metric"><div class="num">300M+</div><div class="lbl">Daily active users served</div></div>
+      <div class="metric"><div class="num">85ms</div><div class="lbl">p95 agent latency (from 320ms)</div></div>
+      <div class="metric"><div class="num">3×</div><div class="lbl">3rd-party agent reliability</div></div>
+      <div class="metric"><div class="num">40%</div><div class="lbl">Cost per request reduction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= COMPETENCIES ======= -->
+<section id="competencies">
+  <div class="wrap reveal">
+    <div class="sec-label">Core Competencies</div>
+    <h2>What I go deep on</h2>
+    <div class="chips" style="margin-top:22px;">
+      <span class="chip">Conversational AI</span>
+      <span class="chip">Real-Time RAG</span>
+      <span class="chip">Agent Orchestration</span>
+      <span class="chip">LLM Integration &amp; Streaming UI</span>
+      <span class="chip">A2A Protocol</span>
+      <span class="chip">Model Context Protocol (MCP)</span>
+      <span class="chip">Human-in-the-Loop</span>
+      <span class="chip">Full-Stack (React + Python)</span>
+      <span class="chip">Distributed Systems</span>
+      <span class="chip">Performance Optimization</span>
+      <span class="chip">ML / Eng Collaboration</span>
+      <span class="chip">Production AI at Scale</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======= EXPERIENCE ======= -->
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="sec-label">Experience</div>
+    <h2>Selected work</h2>
+    <div class="xp" style="margin-top:26px;">
+      <div class="xp-item">
+        <div class="xp-head">
+          <div><span class="xp-role">Principal Software Engineer · AI Tech Lead</span> — <span class="xp-co">Microsoft</span></div>
+          <span class="xp-date">Jul 2018 — Present</span>
+        </div>
+        <div class="xp-loc">Teams Platform · Redmond, WA</div>
+        <div class="xp-desc">
+          Built the <strong>real-time conversational AI layer for Teams meetings</strong> — hybrid RAG over a corpus that grows
+          as the meeting happens, context-window optimization, and a streaming LLM tool-use loop at <strong>sub-200ms</strong>
+          perceived latency. Architected a distributed <strong>multi-agent orchestration runtime</strong> (A2A, MCP, HITL,
+          partial-failure isolation) serving 300M+ DAU, and shipped the manifest-based <strong>Teams Agent SDK</strong>
+          (3rd-party agent reliability +3×, support tickets −60%). Cut p95 agent latency 320ms → 85ms and cost/request 40%.
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-head">
+          <div><span class="xp-role">Member of Technical Staff · Platform Engineering</span> — <span class="xp-co">Envestnet Yodlee</span></div>
+          <span class="xp-date">Apr 2016 — Jul 2018</span>
+        </div>
+        <div class="xp-loc">Bengaluru, India</div>
+        <div class="xp-desc">
+          Designed high-throughput REST APIs aggregating financial data across banks, processing <strong>10M+ transactions/day</strong>
+          on event-driven Kafka pipelines (Java Spring Boot). Built a framework-agnostic integration platform bridging 100+ heterogeneous
+          bank APIs, and an <strong>OAuth 2.0 / PSD2-compliant</strong> client framework for EU Open Banking.
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-head">
+          <div><span class="xp-role">Software Engineer · Build &amp; Automation Tooling</span> — <span class="xp-co">ARM</span></div>
+          <span class="xp-date">Jan 2012 — Apr 2016</span>
+        </div>
+        <div class="xp-loc">Bengaluru, India</div>
+        <div class="xp-desc">
+          Built automation tooling for Physical IP modeling and validation flows — verification algorithms, efficient build
+          pipelines, reusable frameworks. Reduced manual verification effort ~60% and accelerated design-to-tape-out cycles.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= DEEP DIVE HIGHLIGHTS ======= -->
+<section id="deep-dive">
+  <div class="wrap reveal">
+    <div class="sec-label">From the Deep Dive</div>
+    <h2>Engineering decisions behind the Teams agentic AI platform</h2>
+    <p class="tagline" style="font-size:1rem;margin-bottom:30px;">The full write-up is a story of load-bearing decisions — what I reused, what I built, the tradeoffs I lived with, and what I'd do differently. A few of the calls:</p>
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="kicker">Reuse, deliberately</div>
+        <h4>Thin model interface over Azure OpenAI + Claude</h4>
+        <p>Never entertained training our own — model quality shifts month-to-month. The abstraction stayed thin: swap providers, tier routing by complexity (−40% cost/request), unify telemetry. Explicitly <em>not</em> a framework.</p>
+      </div>
+      <div class="dd-card">
+        <div class="kicker">Build, because nothing fit</div>
+        <h4>A meeting-shaped orchestration runtime</h4>
+        <p>Open frameworks were single-process, single-tenant, batch-shaped. We needed distributed, low-latency, turn-taking that respects the floor, idempotent retries, and partial-failure isolation so one bad agent can't take down the meeting.</p>
+      </div>
+      <div class="dd-card">
+        <div class="kicker">The piece I'm proudest of</div>
+        <h4>A declarative agent manifest schema</h4>
+        <p>Code-first SDKs assumed engineers. Ours targeted PMs and IT admins too — specify intent, retrieval surfaces, permissions, HITL defaults, and the runtime fills in correct behavior. Reliability +3×, support tickets −60%, because the right defaults were locked into the shape.</p>
+      </div>
+      <div class="dd-card">
+        <div class="kicker">What I'd do differently</div>
+        <h4>The eval harness should have come first</h4>
+        <p>We shipped the runtime to GA before a real eval harness and caught regressions in production an eval suite would have flagged on commit. Now: eval as a P0 deliverable alongside the first model integration — <em>delay the irreversible, accelerate the reversible.</em></p>
+      </div>
+    </div>
+    <div class="dd-cta">
+      <a class="btn btn-primary" style="display:inline-block;flex:none;padding:13px 26px;" href="raju-roopani-ai-deep-dive.pdf" target="_blank" rel="noopener">Read the full deep dive →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======= SKILLS ======= -->
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="sec-label">Stack</div>
+    <h2>Tools &amp; technologies</h2>
+    <div class="skills" style="margin-top:24px;">
+      <div class="skill-grp">
+        <h5>Conversational AI</h5>
+        <p>Real-Time RAG · Context Engineering · LLM Integration · Streaming UI · Conversation Workflows · Agent Orchestration · A2A · MCP · HITL</p>
+      </div>
+      <div class="skill-grp">
+        <h5>LLM Frameworks</h5>
+        <p>AutoGen · Azure OpenAI · OpenAI API · Anthropic Claude API · LangChain &amp; LlamaIndex (familiarity)</p>
+      </div>
+      <div class="skill-grp">
+        <h5>Languages</h5>
+        <p>Python (AutoGen, Azure OpenAI SDK, Anthropic SDK, OpenAI API) · TypeScript · C#/.NET · Java (Spring Boot) · Node.js</p>
+      </div>
+      <div class="skill-grp">
+        <h5>Frontend</h5>
+        <p>React · TypeScript · Fluent UI · GraphQL · Streaming UI · Perf (virtualization, memoization, batch updates)</p>
+      </div>
+      <div class="skill-grp">
+        <h5>Backend &amp; Distributed</h5>
+        <p>REST · GraphQL · gRPC · WebSockets · Microservices · Event-Driven Architecture · Fault Tolerance · Idempotency · Partial-Failure Isolation</p>
+      </div>
+      <div class="skill-grp">
+        <h5>Cloud, Data &amp; Messaging</h5>
+        <p>Azure (Service Bus, Functions, Cosmos DB, OpenAI) · Docker · Kafka · Cosmos DB · MySQL · MongoDB · Oracle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FOOTER / CONTACT ======= -->
+<footer id="contact">
+  <div class="wrap reveal">
+    <div class="sec-label" style="justify-content:center;">Contact</div>
+    <h2>Let's build conversational AI together.</h2>
+    <p class="sub">Open to focused conversational-AI work. Happy to go deeper on any of the deep dive in conversation.</p>
+    <div class="foot-links">
+      <a class="btn btn-primary" style="flex:none;padding:13px 26px;" href="mailto:Raju.Roopani01@gmail.com">Email me</a>
+      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="https://linkedin.com/in/rajuroopani06" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="https://github.com/rajuroopani" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" style="flex:none;padding:13px 26px;" href="raju-roopani-resume.pdf" download>Résumé (PDF)</a>
+    </div>
+    <div class="copyright">© <span id="yr"></span> Raju Roopani · Built with care · Redmond, WA</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
 </body>
 </html>
